@@ -1,0 +1,390 @@
+===============================================================================
+
+JPMC CENSUS INCOME PROJECT
+
+Classification & Customer Segmentation
+
+================================================================================
+
+
+
+>>> STEP 1: CLASSIFICATION MODEL <<<
+
+
+
+============================================================
+
+CENSUS INCOME CLASSIFICATION PIPELINE
+
+============================================================
+
+============================================================
+
+CENSUS DATA PREPROCESSING PIPELINE
+
+============================================================
+
+Loaded 42 column names
+
+Raw data shape: (199523, 42)
+
+Duplicate rows: 3229
+
+After deduplication: (196294, 42)
+
+
+
+Target value_counts:
+
+label
+
+- 50000    183912
+
+50000+      12382
+
+Name: count, dtype: Int64
+
+Dropped 0 rows with invalid/missing target
+
+
+
+Weight summary:
+
+count    196294.000000
+
+mean       1743.267584
+
+std         996.945985
+
+min          37.870000
+
+25%        1061.530000
+
+50%        1620.175000
+
+75%        2194.060000
+
+max       18656.300000
+
+Name: weight, dtype: float64
+
+Any non-positive weights? False
+
+
+
+Dropped sparse columns. Shape: (196294, 41)
+
+
+
+Log-transformed columns added: 4
+
+
+
+Numeric columns: 16
+
+Categorical columns: 27
+
+Remaining missing values: 0
+
+
+
+============================================================
+
+PREPROCESSING COMPLETE
+
+Final shape: X=(196294, 42), y=(196294,), w=(196294,)
+
+Target balance: 0.0631 positive class
+
+============================================================
+
+
+
+============================================================
+
+TRAIN-TEST SPLIT
+
+============================================================
+
+Train: (157035, 42) | Test: (39259, 42)
+
+Train positive rate: 0.0631
+
+Test positive rate: 0.0631
+
+============================================================
+
+
+
+Preprocessing pipeline:
+
+  Numeric features: 16
+
+  Categorical features: 26
+
+
+
+============================================================
+
+TRAINING LOGISTIC REGRESSION
+
+============================================================
+
+/Users/prakhardungarwal/Downloads/jpmc_census_project/venv/lib/python3.12/site-packages/sklearn/linear_model/_logistic.py:1135: FutureWarning: 'penalty' was deprecated in version 1.8 and will be removed in 1.10. To avoid this warning, leave 'penalty' set to its default value and use 'l1_ratio' or 'C' instead. Use l1_ratio=0 instead of penalty='l2', l1_ratio=1 instead of penalty='l1', and C=np.inf instead of penalty=None.
+
+  warnings.warn(
+
+Logistic Regression training completed
+
+
+
+============================================================
+
+TRAINING RANDOM FOREST
+
+============================================================
+
+Random Forest training completed
+
+
+
+============================================================
+
+TRAINING XGBOOST
+
+============================================================
+
+XGBoost training completed
+
+
+
+============================================================
+
+TRAINING LIGHTGBM
+
+============================================================
+
+[LightGBM] [Info] Number of positive: 9906, number of negative: 147129
+
+[LightGBM] [Info] Auto-choosing row-wise multi-threading, the overhead of testing was 0.042995 seconds.
+
+You can set `force_row_wise=true` to remove the overhead.
+
+And if memory is not enough, you can set `force_col_wise=true`.
+
+[LightGBM] [Info] Total Bins 2469
+
+[LightGBM] [Info] Number of data points in the train set: 157035, number of used features: 388
+
+[LightGBM] [Info] [binary:BoostFromScore]: pavg=0.507031 -> initscore=0.028126
+
+[LightGBM] [Info] Start training from score 0.028126
+
+LightGBM training completed
+
+
+
+Evaluating Logistic Regression...
+
+
+
+Optimal threshold: 0.85 (f1=0.5850)
+
+
+
+============================================================
+
+Logistic Regression @ threshold=0.85
+
+============================================================
+
+ROC-AUC:   0.9452
+
+PR-AUC:    0.6282
+
+Precision: 0.5602
+
+Recall:    0.6120
+
+F1-Score:  0.5850
+
+
+
+Weighted Confusion Matrix:
+
+           Predicted Neg    Predicted Pos
+
+Actual Neg        61609820         2162439
+
+Actual Pos         1746313         2754705
+
+============================================================
+
+
+
+Evaluating Random Forest...
+
+
+
+Optimal threshold: 0.60 (f1=0.5926)
+
+
+
+============================================================
+
+Random Forest @ threshold=0.60
+
+============================================================
+
+ROC-AUC:   0.9471
+
+PR-AUC:    0.6309
+
+Precision: 0.5679
+
+Recall:    0.6197
+
+F1-Score:  0.5926
+
+
+
+Weighted Confusion Matrix:
+
+           Predicted Neg    Predicted Pos
+
+Actual Neg        61649625         2122634
+
+Actual Pos         1711763         2789255
+
+============================================================
+
+
+
+Evaluating XGBoost...
+
+
+
+Optimal threshold: 0.85 (f1=0.6231)
+
+
+
+============================================================
+
+XGBoost @ threshold=0.85
+
+============================================================
+
+ROC-AUC:   0.9534
+
+PR-AUC:    0.6903
+
+Precision: 0.6389
+
+Recall:    0.6080
+
+F1-Score:  0.6231
+
+
+
+Weighted Confusion Matrix:
+
+           Predicted Neg    Predicted Pos
+
+Actual Neg        62225272         1546987
+
+Actual Pos         1764259         2736758
+
+============================================================
+
+
+
+Evaluating LightGBM...
+
+/Users/prakhardungarwal/Downloads/jpmc_census_project/venv/lib/python3.12/site-packages/sklearn/utils/validation.py:2691: UserWarning: X does not have valid feature names, but LGBMClassifier was fitted with feature names
+
+  warnings.warn(
+
+
+
+Optimal threshold: 0.85 (f1=0.6372)
+
+
+
+============================================================
+
+LightGBM @ threshold=0.85
+
+============================================================
+
+ROC-AUC:   0.9551
+
+PR-AUC:    0.6998
+
+Precision: 0.6205
+
+Recall:    0.6547
+
+F1-Score:  0.6372
+
+
+
+Weighted Confusion Matrix:
+
+           Predicted Neg    Predicted Pos
+
+Actual Neg        61970333         1801926
+
+Actual Pos         1554294         2946723
+
+============================================================
+
+
+
+================================================================================
+
+MODEL COMPARISON
+
+================================================================================
+
+Model                        ROC-AUC     PR-AUC  Precision     Recall         F1
+
+--------------------------------------------------------------------------------
+
+Logistic Regression           0.9452     0.6282     0.5602     0.6120     0.5850
+
+Random Forest                 0.9471     0.6309     0.5679     0.6197     0.5926
+
+XGBoost                       0.9534     0.6903     0.6389     0.6080     0.6231
+
+LightGBM                      0.9551     0.6998     0.6205     0.6547     0.6372
+
+================================================================================
+
+Saved Logistic Regression to ../models/logistic_regression.pkl
+
+Saved Random Forest to ../models/random_forest.pkl
+
+Saved XGBoost to ../models/xgboost.pkl
+
+Saved LightGBM to ../models/lightgbm.pkl
+
+
+
+============================================================
+
+BEST MODEL: LightGBM
+
+ROC-AUC: 0.9551
+
+PR-AUC: 0.6998
+
+============================================================
+
+
+
+Classification pipeline completed successfully!
+
+
+
+✓ Classification completed successfully
+
